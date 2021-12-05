@@ -1,3 +1,5 @@
+from timeit import default_timer as timer
+from datetime import timedelta
 
 def open_input(filename):
     # get list of numbers from input file
@@ -18,11 +20,15 @@ def count_part_two(list):
     sliding_list = []
     for i in range(len(list)):
         if i+2 < len(list):
-            sliding_list.append(list[i]+list[i+1]+list[i+2])
+            #1158
+            sliding_list.append(sum(list[i:i+3]))
     return count(sliding_list)
 
 
 if __name__ == '__main__':
+    start = timer()
     mesures = open_input('.\Day1\input.txt')
     print(count(mesures))
+    end = timer()
+    print(timedelta(seconds=end-start))
     print(count_part_two(mesures))
